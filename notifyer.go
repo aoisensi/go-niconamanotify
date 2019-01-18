@@ -51,6 +51,9 @@ func (n *Notifyer) Listen() error {
 	for {
 		cn, err := n.conn.Read(buf)
 		if err != nil {
+			if strings.HasSuffix(err.Error(), "use of closed network connection") { //is this ok?
+				return nil
+			}
 			return err
 		}
 		x := string(buf[:cn])

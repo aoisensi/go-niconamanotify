@@ -17,5 +17,7 @@ func main() {
 	}
 	notifyer.Init(nil)
 	defer notifyer.Close()
-	notifyer.Listen()
+	if err := notifyer.Listen(); err != nil {
+		panic(err)
+	}
 }
